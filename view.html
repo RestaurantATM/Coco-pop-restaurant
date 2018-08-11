@@ -8,17 +8,58 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="https://code.jquery.com/jquery.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>  
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+  
 </head>
 <body>
         <div class="container">
                 <div class="jumbotron">
                     <h1>Coco pop restaurant</h1>
+                    <h2>We only have 5 tables! Book your seat before they all are gone!</h2>
                     <a class="" href="/tables">View tables</a>
                     <a class="" href="/add">Make a reservation</a>
-                    <a class="" href="/api/tables">View tables</a>
-                    <a class="" href="/api/waitlist">Make a reservation</a>
+                    <a class="" href="/api/tables">API Tables</a>
+                    <a class="" href="/api/waitlist">API Waitlist</a>
                 </div>
             </div>
+            <div class="container">
+                    <h1>Reserved tables</h1>
+                <div id="bookings">
+                    
+                </div>
+                <h1>Waitlist</h1>
+                <div id="waitlist">
+                    
+                    </div>
+            </div>
 </body>
+<script>
+ $.get("/api/tables", function(data) {
+      for (var i = 0; i < data.length; i++) {
+        var wellSection = $("<div>");
+        wellSection.addClass("well");
+        wellSection.attr("id", "table-" + i);
+        $("#bookings").append(wellSection);
+
+        $("#table-" + i).append("<h2>" + data[i].name + "</h2>");
+        $("#table-" + i).append("<h3>Email: " + data[i].email + "</h4>");
+        $("#table-" + i).append("<h3>Phone Number: " + data[i].phoneNumber + "</h4>");
+        $("#table-" + i).append("<h3>ID: " + data[i].uniqueId + "</h4>");
+      }
+    });
+    $.get("/api/waitlist", function(data) {
+      for (var i = 0; i < data.length; i++) {
+        var wellSection = $("<div>");
+        wellSection.addClass("well");
+        wellSection.attr("id", "waitlist-" + i);
+        $("#waitlist").append(wellSection);
+
+        $("#waitlist-" + i).append("<h2>" + data[i].name + "</h2>");
+        $("#waitlist-" + i).append("<h3>Email: " + data[i].email + "</h4>");
+        $("#waitlist-" + i).append("<h3>Phone Number: " + data[i].phoneNumber + "</h4>");
+        $("#waitlist-" + i).append("<h3>ID: " + data[i].uniqueId + "</h4>");
+      }
+    });
+  
+</script>
 </html>
