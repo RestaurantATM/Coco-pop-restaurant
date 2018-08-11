@@ -52,6 +52,11 @@ app.get("/tables", function(req, res) {
   res.sendFile(path.join(__dirname, "view.html"));
 });
 
+app.get("/api/tables", function(req, res) {
+    res.json(bookingList);
+  });
+
+
 // Starts the server to begin listening
 // =============================================================
 app.listen(PORT, function() {
