@@ -57,9 +57,27 @@ app.get("/api/tables", function(req, res) {
   });
 
 app.get("/api/waitlist", function(req, res){
-    res.json(waitlist);
+    res.json(waitList);
 }
 );
+
+app.post("/add",function(req, res) {
+    // req.body hosts is equal to the JSON post sent from the user
+    // This works because of our body-parser middleware
+    var reserve = req.body;
+  
+    // Using a RegEx Pattern to remove spaces from newCharacter
+    // You can read more about RegEx Patterns later https://www.regexbuddy.com/regex.html
+    if(bookingList.length===5){
+        waitList.push(reserve);
+    }else{
+        bookingList.push(reserve);
+    }
+    console.log(reserve);
+  
+    res.sendFile(path.join(__dirname, "view.html"));
+});
+
 // Starts the server to begin listening
 // =============================================================
 app.listen(PORT, function() {
