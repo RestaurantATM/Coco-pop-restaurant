@@ -56,7 +56,10 @@ app.get("/api/tables", function(req, res) {
     res.json(bookingList);
   });
 
-
+app.get("/api/waitlist", function(req, res){
+    res.json(waitlist);
+}
+);
 // Starts the server to begin listening
 // =============================================================
 app.listen(PORT, function() {
