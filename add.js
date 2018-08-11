@@ -1,10 +1,15 @@
 $('#submit').on('click', function (event) {
     event.preventDefault();
 
-    let name = $('#name').val().trim();
-    let phone = $('#phone').val().trim();
-    let email = $('#email').val().trim();
-    let id = $('#id').val().trim();
+    let reserv = {
+        name: $('#name').val().trim(),
+        phone: $('#phone').val().trim(),
+        email: $('#email').val().trim(),
+        id: $('#id').val().trim()
+    };
 
+    $.post('/add', reserv).then(function (error) {
+        if (error) console.log(error);
+    })
 
 })
