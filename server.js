@@ -51,7 +51,10 @@ app.get("/add", function(req, res) {
 app.get("/tables", function(req, res) {
   res.sendFile(path.join(__dirname, "view.html"));
 });
-
+app.get("/api/waitlist", function(req, res){
+    res.json(waitlist);
+}
+);
 // Starts the server to begin listening
 // =============================================================
 app.listen(PORT, function() {
